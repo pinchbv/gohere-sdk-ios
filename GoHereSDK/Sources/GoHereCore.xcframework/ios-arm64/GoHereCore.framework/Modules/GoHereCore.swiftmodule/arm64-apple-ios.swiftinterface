@@ -1,0 +1,1104 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios14.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GoHereCore
+import AVFoundation/*.AVMakeRect*/
+import AuthenticationServices
+import Combine
+import CommonCrypto/*.CC_LONG*/
+import CommonCrypto/*.CC_SHA256*/
+import CommonCrypto/*.CC_SHA256_DIGEST_LENGTH*/
+import Contacts
+import CoreGraphics
+import CoreLocation
+import Foundation
+import Foundation/*.Bundle*/
+import Foundation/*.ProcessInfo*/
+import Foundation/*.URL*/
+import GoogleMaps
+import MapKit
+import MessageUI
+import MobileCoreServices
+import OSLog
+import SafariServices
+import Swift
+import SwiftUI
+import UIKit
+import _AuthenticationServices_SwiftUI
+import _Concurrency
+import _MapKit_SwiftUI
+import _StringProcessing
+import os.log
+import os
+public protocol Analytics {
+  func trackScreen(name: Swift.String, screenClass _: Swift.String?)
+  func log(_ event: GoHereCore.AnalyticsEvent)
+  func time(_ event: GoHereCore.AnalyticsEvent)
+  func setUserProperty(_ property: GoHereCore.AnalyticsUserProperty, value: Any)
+  func incrementUserProperty(_ property: GoHereCore.AnalyticsUserProperty, value: Swift.Int)
+}
+public enum AnalyticsEvent {
+  case login(kind: GoHereCore.LoginKind)
+  case register(kind: GoHereCore.LoginKind)
+  case reviewPosted(review: GoHereCore.Review, shared: Swift.Bool)
+  case favoritePlaceAdded(place: GoHereCore.Place)
+  case affiliateCTA(type: Swift.String?, link: Foundation.URL)
+  case advertorialCTA(slug: Swift.String?, link: Foundation.URL)
+  case promotedPlaceAdvertorialCTA(type: Swift.String?, link: Foundation.URL)
+  case placeDetail(place: GoHereCore.Place)
+  case promotedPlaceSelected(place: GoHereCore.Place)
+  case promotedPlacesDismissed
+  case splashScreen
+}
+public enum AnalyticsUserProperty : Swift.String {
+  case privateProfile
+  case followerCount
+  case followingCount
+  case favoritesCount
+  case ownReviewCount
+  case facebookConnected
+  case addressBookConnnected
+  case pushNotificationsEnabled
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct SavePlaceButton : SwiftUI.View {
+  public init(place: GoHereCore.Place)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore15SavePlaceButtonV4bodyQrvp", 0) __
+}
+extension SwiftUI.View {
+  public func floatingActionButtonStyle(width: GoHereCore.FloatingActionButtonStyle.Width = .compact, backgroundColor: SwiftUI.Color = .gh(.backgroundPrimary)) -> some SwiftUI.View
+  
+}
+public struct HighlightButtonStyle : SwiftUI.ButtonStyle {
+  public enum Kind {
+    case opacity(Swift.Double)
+  }
+  public init(_ kind: GoHereCore.HighlightButtonStyle.Kind = .opacity(0.85))
+  public func makeBody(configuration: GoHereCore.HighlightButtonStyle.Configuration) -> some SwiftUI.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore20HighlightButtonStyleV8makeBody13configurationQr7SwiftUI0eF13ConfigurationV_tF", 0) __
+}
+public struct FloatingActionButtonStyle : SwiftUI.ButtonStyle {
+  public enum Width {
+    case compact
+    case expanded
+    case small
+    public static func == (a: GoHereCore.FloatingActionButtonStyle.Width, b: GoHereCore.FloatingActionButtonStyle.Width) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public func makeBody(configuration: GoHereCore.FloatingActionButtonStyle.Configuration) -> some SwiftUI.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore25FloatingActionButtonStyleV8makeBody13configurationQr7SwiftUI0fG13ConfigurationV_tF", 0) __
+}
+@_Concurrency.MainActor(unsafe) public struct ImageGallery : SwiftUI.View {
+  public struct Image : Swift.Identifiable {
+    public var id: Swift.String {
+      get
+    }
+    public typealias ID = Swift.String
+  }
+  @_Concurrency.MainActor(unsafe) public init(images: [GoHereCore.ImageGallery.Image], isFullScreen: Swift.Bool = false, imageSelected: @escaping (GoHereCore.ImageGallery.Image) -> Swift.Void = { _ in })
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore12ImageGalleryV4bodyQrvp", 0) __
+}
+public protocol MainCoordinator : AnyObject {
+  var bootstrap: GoHereCore.Bootstrap { get }
+  var currentUser: GoHereCore.User? { get }
+  func navigateToPlaceDetail(place: GoHereCore.AnyPlace)
+  func navigateToGallery(images: [GoHereCore.ImageGallery.Image])
+  func pop()
+}
+public struct ReviewSmallView : SwiftUI.View {
+  public init(avatar: GoHereCore.ImagePath?, initials: Swift.String, name: Swift.String? = nil, rating: Swift.Int, text: Swift.String?, images: [GoHereCore.ImagePath], date: Foundation.Date? = nil)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore15ReviewSmallViewV4bodyQrvp", 0) __
+}
+public struct GMap : SwiftUI.UIViewRepresentable {
+  public let markers: [GoogleMaps.GMSMarker]
+  public let onGooglePlaceSelected: (Swift.String) -> Swift.Void
+  @SwiftUI.Binding @_projectedValueProperty($selectedMarker) public var selectedMarker: GoHereCore.SelectedMapMarker? {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $selectedMarker: SwiftUI.Binding<GoHereCore.SelectedMapMarker?> {
+    get
+  }
+  @SwiftUI.Binding @_projectedValueProperty($region) public var region: MapKit.MKCoordinateRegion {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $region: SwiftUI.Binding<MapKit.MKCoordinateRegion> {
+    get
+  }
+  public init(markers: [GoogleMaps.GMSMarker], onGooglePlaceSelected: @escaping (Swift.String) -> Swift.Void, selectedMarker: SwiftUI.Binding<GoHereCore.SelectedMapMarker?>, region: SwiftUI.Binding<MapKit.MKCoordinateRegion>)
+  @_Concurrency.MainActor(unsafe) public func makeCoordinator() -> GoHereCore.GMap.Coordinator
+  @_Concurrency.MainActor(unsafe) public func makeUIView(context: SwiftUI.UIViewRepresentableContext<GoHereCore.GMap>) -> GoogleMaps.GMSMapView
+  @_Concurrency.MainActor(unsafe) public func updateUIView(_ mapView: GoogleMaps.GMSMapView, context _: SwiftUI.UIViewRepresentableContext<GoHereCore.GMap>)
+  @objc @_hasMissingDesignatedInitializers public class Coordinator : ObjectiveC.NSObject, GoogleMaps.GMSMapViewDelegate {
+    @objc public func mapView(_: GoogleMaps.GMSMapView, willMove gesture: Swift.Bool)
+    @objc public func mapView(_: GoogleMaps.GMSMapView, idleAt _: GoogleMaps.GMSCameraPosition)
+    @objc public func mapView(_ mapView: GoogleMaps.GMSMapView, didChange _: GoogleMaps.GMSCameraPosition)
+    @objc public func mapView(_: GoogleMaps.GMSMapView, didTap marker: GoogleMaps.GMSMarker) -> Swift.Bool
+    @objc public func mapView(_: GoogleMaps.GMSMapView, didTapAt _: CoreLocation.CLLocationCoordinate2D)
+    @objc public func mapView(_: GoogleMaps.GMSMapView, didTapPOIWithPlaceID placeID: Swift.String, name _: Swift.String, location _: CoreLocation.CLLocationCoordinate2D)
+    @objc deinit
+  }
+  public typealias Body = Swift.Never
+  public typealias UIViewType = GoogleMaps.GMSMapView
+}
+extension UIKit.UIImagePickerController.SourceType : Swift.Identifiable {
+  public var id: Swift.Int {
+    get
+  }
+  public typealias ID = Swift.Int
+}
+public struct SafariView : SwiftUI.UIViewControllerRepresentable {
+  public init(url: Foundation.URL)
+  @_Concurrency.MainActor(unsafe) public func makeUIViewController(context _: SwiftUI.UIViewControllerRepresentableContext<GoHereCore.SafariView>) -> SafariServices.SFSafariViewController
+  @_Concurrency.MainActor(unsafe) public func updateUIViewController(_: SafariServices.SFSafariViewController, context _: SwiftUI.UIViewControllerRepresentableContext<GoHereCore.SafariView>)
+  public typealias Body = Swift.Never
+  public typealias Coordinator = Swift.Void
+  public typealias UIViewControllerType = SafariServices.SFSafariViewController
+}
+public class AutocompleteSearchModel : Combine.ObservableObject {
+  public init(placeRepo: GoHereCore.PlaceRepository)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public struct ExploreCardView<Content> : SwiftUI.View where Content : SwiftUI.View {
+  public init(image: GoHereCore.ImagePath?, name: Swift.String, category: GoHereCore.PlaceCategory?, distance: Swift.String? = nil, saveButton: GoHereCore.SavePlaceButton? = nil, imageHeight: CoreFoundation.CGFloat = ExploreCardConstant.imageHeight, @SwiftUI.ViewBuilder content: () -> Content)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore15ExploreCardViewV4bodyQrvp", 0) __<Content>
+}
+public enum ExploreCardConstant {
+  public static var imageHeight: CoreFoundation.CGFloat
+}
+public struct ExploreListView : SwiftUI.View {
+  public init(places: [GoHereCore.Place], selectedPlace: SwiftUI.Binding<GoHereCore.AnyPlace?>)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore15ExploreListViewV4bodyQrvp", 0) __
+}
+@objc @_hasMissingDesignatedInitializers public class MapPlaceMarker : GoHereCore.GoHereMarker {
+  final public let place: GoHereCore.Place
+  @objc deinit
+}
+public enum SelectedMapMarker : Swift.Equatable {
+  case place(GoHereCore.MapPlaceMarker)
+  public static func == (a: GoHereCore.SelectedMapMarker, b: GoHereCore.SelectedMapMarker) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class GoHereMarker : GoogleMaps.GMSMarker {
+  @objc deinit
+}
+final public class ExploreModel : Combine.ObservableObject {
+  @Combine.Published @_projectedValueProperty($region) final public var region: MapKit.MKCoordinateRegion {
+    get
+    set
+    _modify
+  }
+  final public var $region: Combine.Published<MapKit.MKCoordinateRegion>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($locationLabel) final public var locationLabel: Swift.String {
+    get
+    set
+    _modify
+  }
+  final public var $locationLabel: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($filters) final public var filters: GoHereCore.ExploreModel.Filters {
+    get
+    set
+    _modify
+  }
+  final public var $filters: Combine.Published<GoHereCore.ExploreModel.Filters>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($error) final public var error: Swift.Error? {
+    get
+    set
+    _modify
+  }
+  final public var $error: Combine.Published<Swift.Error?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isShowingMap) final public var isShowingMap: Swift.Bool {
+    get
+    set
+  }
+  final public var $isShowingMap: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($markers) final public var markers: [GoHereCore.MapPlaceMarker] {
+    get
+    set
+    _modify
+  }
+  final public var $markers: Combine.Published<[GoHereCore.MapPlaceMarker]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($shownPlaceDetails) final public var shownPlaceDetails: GoHereCore.AnyPlace? {
+    get
+    set
+    _modify
+  }
+  final public var $shownPlaceDetails: Combine.Published<GoHereCore.AnyPlace?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($selectedMarker) final public var selectedMarker: GoHereCore.Status<GoHereCore.SelectedMapMarker>? {
+    get
+    set
+  }
+  final public var $selectedMarker: Combine.Published<GoHereCore.Status<GoHereCore.SelectedMapMarker>?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($userLocation) final public var userLocation: GoHereCore.UserLocationManager.LocationState? {
+    get
+    set
+    _modify
+  }
+  final public var $userLocation: Combine.Published<GoHereCore.UserLocationManager.LocationState?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($userLocationStatus) final public var userLocationStatus: GoHereCore.LocationServicesStatus {
+    get
+    set
+    _modify
+  }
+  final public var $userLocationStatus: Combine.Published<GoHereCore.LocationServicesStatus>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($bottomSheetPosition) final public var bottomSheetPosition: GoHereCore.PromotedBottomSheetPosition {
+    get
+    set
+  }
+  final public var $bottomSheetPosition: Combine.Published<GoHereCore.PromotedBottomSheetPosition>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isPresentingUrl) final public var isPresentingUrl: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  final public var $isPresentingUrl: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($promotedPlaces) final public var promotedPlaces: GoHereCore.PromotedPlaces? {
+    get
+  }
+  final public var $promotedPlaces: Combine.Published<GoHereCore.PromotedPlaces?>.Publisher {
+    get
+  }
+  @Combine.Published @_projectedValueProperty($isUserAuthenticated) final public var isUserAuthenticated: Swift.Bool {
+    get
+    set
+    _modify
+  }
+  final public var $isUserAuthenticated: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  final public var isUserLocationPossible: Swift.Bool {
+    get
+  }
+  final public var biasRegion: MapKit.MKMapRect?
+  final public let promotedPlacesZoomRadius: Swift.Int
+  final public var shouldCenterOnUser: Swift.Bool
+  final public var shouldSelectClosestPlace: Swift.Bool
+  final public var externalUrl: Foundation.URL?
+  final public let placeRepository: GoHereCore.PlaceRepository
+  public init(biasRegion: MapKit.MKMapRect?, promotedPlacesSearchRadius: Swift.Int, maximumSpanDistance: Swift.Int, placeRepo: GoHereCore.PlaceRepository, userRepo: GoHereCore.UserRepository, locationManager: GoHereCore.UserLocationManager = UserLocationManager(), geocoder: GoHereCore.Geocoder = CLGeocoder(), reviewRepository: GoHereCore.ReviewRepository, analytics: GoHereCore.Analytics, scheduler: Dispatch.DispatchQueue = .main)
+  final public func listViewPlaces() -> [GoHereCore.Place]
+  final public func bindObservables()
+  final public func centerOnUserLocationIfNeeded()
+  final public func centerOnUserLocation(force: Swift.Bool)
+  final public func selectGoogleMarker(for id: GoHereCore.PlaceExternal.ID)
+  final public func setSelected(placeAutocomplete: GoHereCore.PlaceExternal)
+  final public func showPlaceDetails(for place: GoHereCore.Place)
+  final public func showPlaceDetails(for external: GoHereCore.PlaceExternal)
+  final public func removeAllPlaces()
+  final public func dismissCard()
+  final public func selectPromotedPlace(place: GoHereCore.Place)
+  final public func openAffiliateInfo(place: GoHereCore.Place)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+extension GoHereCore.ExploreModel {
+  public struct Filters : Swift.Equatable {
+    public static func == (a: GoHereCore.ExploreModel.Filters, b: GoHereCore.ExploreModel.Filters) -> Swift.Bool
+  }
+}
+@_Concurrency.MainActor(unsafe) public struct ExploreSearchView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(isMap: SwiftUI.Binding<Swift.Bool>, filters: SwiftUI.Binding<GoHereCore.ExploreModel.Filters>, locationLabel: Swift.String, location: CoreLocation.CLLocationCoordinate2D, selectionChanged: @escaping (GoHereCore.PlaceExternal) -> Swift.Void, searchModel: GoHereCore.AutocompleteSearchModel, categories: [GoHereCore.PlaceCategory], mapListSwitchStyle: GoHereCore.MapListSwitchStyle = .iconsOnly)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore17ExploreSearchViewV4bodyQrvp", 0) __
+}
+public struct ExploreSearchHeaderHeightPreferenceKey : SwiftUI.PreferenceKey {
+  public static let defaultValue: CoreFoundation.CGFloat
+  public static func reduce(value: inout CoreFoundation.CGFloat, nextValue: () -> CoreFoundation.CGFloat)
+  public typealias Value = CoreFoundation.CGFloat
+}
+public enum MapListSwitchStyle {
+  case iconsOnly
+  case textsOnly
+  public static func == (a: GoHereCore.MapListSwitchStyle, b: GoHereCore.MapListSwitchStyle) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PromotedBottomSheetPosition : CoreFoundation.CGFloat, Swift.CaseIterable {
+  case hidden, middle, bottom
+  public init?(rawValue: CoreFoundation.CGFloat)
+  public typealias AllCases = [GoHereCore.PromotedBottomSheetPosition]
+  public typealias RawValue = CoreFoundation.CGFloat
+  public static var allCases: [GoHereCore.PromotedBottomSheetPosition] {
+    get
+  }
+  public var rawValue: CoreFoundation.CGFloat {
+    get
+  }
+}
+extension GoHereCore.PromotedBottomSheetPosition {
+  public func getValue() -> CoreFoundation.CGFloat
+}
+public struct PromotedPlacesPagerView : SwiftUI.View {
+  public init(places: Swift.Set<GoHereCore.Place>, onPromotedPlaceTapped: @escaping (GoHereCore.Place) -> (), onAffiliateButtonTapped: @escaping (GoHereCore.Place) -> ())
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore23PromotedPlacesPagerViewV4bodyQrvp", 0) __
+}
+final public class PlaceDetailsModel : Combine.ObservableObject {
+  public init(id: GoHereCore.Place.ID, placeRepo: GoHereCore.PlaceRepository, reviewRepo: GoHereCore.ReviewRepository, translatorRepo: GoHereCore.TranslatorRepository, analytics: GoHereCore.Analytics)
+  convenience public init(place: GoHereCore.Place, placeRepo: GoHereCore.PlaceRepository, translatorRepo: GoHereCore.TranslatorRepository, reviewRepo: GoHereCore.ReviewRepository, analytics: GoHereCore.Analytics)
+  public init(lookupID: Swift.String, providerID: Swift.Int, placeRepo: GoHereCore.PlaceRepository, reviewRepo: GoHereCore.ReviewRepository, translatorRepo: GoHereCore.TranslatorRepository, analytics: GoHereCore.Analytics)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@_Concurrency.MainActor(unsafe) public struct PlaceDetailsView : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public init(model: GoHereCore.PlaceDetailsModel)
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore16PlaceDetailsViewV4bodyQrvp", 0) __
+}
+public typealias RegistrationFactory<S> = (GoHereCore.DependencyResolver) -> S
+public protocol DependencyContainer {
+  func register<Service>(service: Service)
+  func register<Service>(service: Service, name: Swift.String)
+  func register<Service>(factory: @escaping GoHereCore.RegistrationFactory<Service>)
+  func register<Service>(name: Swift.String, factory: @escaping GoHereCore.RegistrationFactory<Service>)
+}
+public protocol DependencyResolver {
+  func resolve<Service>(_ type: Service.Type, name: Swift.String?) -> Service
+  func resolve<Service>(_ type: Service.Type) -> Service
+}
+extension SwiftUI.EnvironmentValues {
+  public var dependencyContainer: GoHereCore.DependencyContainer & GoHereCore.DependencyResolver {
+    get
+    set
+  }
+  public var mainCoordinator: GoHereCore.MainCoordinator {
+    get
+  }
+}
+public enum LocationServicesStatus {
+  case unknown
+  case disabled
+  case authorized
+  case denied
+  public static func == (a: GoHereCore.LocationServicesStatus, b: GoHereCore.LocationServicesStatus) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol LocationManager : AnyObject {
+  static func locationServicesEnabled() -> Swift.Bool
+  var authorizationStatus: CoreLocation.CLAuthorizationStatus { get }
+  var delegate: CoreLocation.CLLocationManagerDelegate? { get set }
+  var location: CoreLocation.CLLocation? { get }
+  func requestWhenInUseAuthorization()
+  func requestLocation()
+}
+extension CoreLocation.CLLocationManager : GoHereCore.LocationManager {
+}
+public protocol Geocoder {
+  func reverseGeocode(location: CoreLocation.CLLocation) -> Combine.AnyPublisher<[CoreLocation.CLPlacemark], Swift.Error>
+}
+extension CoreLocation.CLGeocoder : GoHereCore.Geocoder {
+  public func reverseGeocode(location: CoreLocation.CLLocation) -> Combine.AnyPublisher<[CoreLocation.CLPlacemark], Swift.Error>
+}
+extension CoreLocation.CLLocationCoordinate2D : Swift.Equatable, Swift.Hashable {
+  public static func == (lhs: CoreLocation.CLLocationCoordinate2D, rhs: CoreLocation.CLLocationCoordinate2D) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension SwiftUI.Text {
+  public init(localizationKey: Swift.String)
+}
+extension Swift.String {
+  public func localize() -> Swift.String
+}
+extension MapKit.MKCoordinateRegion : Swift.Equatable {
+  public static func == (lhs: MapKit.MKCoordinateRegion, rhs: MapKit.MKCoordinateRegion) -> Swift.Bool
+}
+extension UIKit.UIApplication {
+  @_Concurrency.MainActor(unsafe) public var fullApplicationVersion: Swift.String {
+    get
+  }
+}
+extension UIKit.UIColor {
+  convenience public init(rgb: Swift.Int, alpha: CoreFoundation.CGFloat = 1.0)
+}
+extension Foundation.URL {
+  public mutating func addQueryItem(name: Swift.String, value: Swift.String)
+}
+@_hasMissingDesignatedInitializers final public class GohereCore {
+  public static func initialize(config: GoHereCore.TargetConfig, theme: GoHereCore.Theme)
+  public static func registerDevice(token: Foundation.Data)
+  public static func setupWindow(_ window: UIKit.UIWindow, options connectionOptions: UIKit.UIScene.ConnectionOptions)
+  public static func handleDeepLink(link: Foundation.URL)
+  @objc deinit
+}
+public protocol DynamicLinkManager {
+  #if compiler(>=5.3) && $AsyncAwait
+  func createBucketListUrl(bucketList: GoHereCore.BucketList) async throws -> Foundation.URL
+  #endif
+}
+public protocol Facebook {
+  var isEnabled: Swift.Bool { get }
+  var token: Swift.String? { get }
+  var isAuthenticated: Swift.Bool { get }
+  func authenticate() -> Combine.Future<Swift.String, Swift.Error>
+}
+@objc final public class UserLocationManager : ObjectiveC.NSObject {
+  public enum LocationState {
+    case locating(previous: CoreLocation.CLLocation?)
+    case located(CoreLocation.CLLocation?)
+    case failed(error: Swift.Error, last: CoreLocation.CLLocation?)
+  }
+  public init(manager: GoHereCore.LocationManager = CLLocationManager())
+  @objc deinit
+}
+extension GoHereCore.UserLocationManager : CoreLocation.CLLocationManagerDelegate {
+  @objc final public func locationManager(_: CoreLocation.CLLocationManager, didChangeAuthorization status: CoreLocation.CLAuthorizationStatus)
+  @objc final public func locationManager(_: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc final public func locationManager(_: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
+}
+extension GoHereCore.UserLocationManager.LocationState {
+  public var value: CoreLocation.CLLocation? {
+    get
+  }
+  public var isLocating: Swift.Bool {
+    get
+  }
+  public var isLocated: Swift.Bool {
+    get
+  }
+}
+extension GoHereCore.UserLocationManager.LocationState : Swift.Equatable {
+  public static func == (lhs: GoHereCore.UserLocationManager.LocationState, rhs: GoHereCore.UserLocationManager.LocationState) -> Swift.Bool
+}
+public struct AffiliateInfo : Swift.Hashable {
+  public let kind: Swift.String
+  public let actionURL: Foundation.URL
+  public var callToAction: Swift.String {
+    get
+  }
+  public init(kind: Swift.String, actionURL: Foundation.URL, ctaButton: Swift.String?)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.AffiliateInfo, b: GoHereCore.AffiliateInfo) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum AnyPlace : Swift.Equatable {
+  case placeID(GoHereCore.Place.ID)
+  case place(GoHereCore.Place)
+  case lookup(GoHereCore.PlaceExternal)
+  case autocomplete(GoHereCore.PlaceExternal)
+  public static func == (a: GoHereCore.AnyPlace, b: GoHereCore.AnyPlace) -> Swift.Bool
+}
+public struct Bootstrap {
+  public let mothershipId: GoHereCore.User.ID?
+  public let categories: [GoHereCore.PlaceCategory]
+  public let defaultRegion: MapKit.MKMapRect?
+  public let biasLocation: GoHereCore.GPSLocation?
+  public let bannerId: Swift.String?
+  public let uberClientId: Swift.String?
+  public let promotedPlacesSearchRadius: Swift.Int
+  public let maximumSpanDistance: Swift.Int
+  public let androidAppId: Swift.String
+  public let iOSAppId: Swift.String
+  public let iOSStoreId: Swift.String
+  public init(mothershipId: GoHereCore.User.ID? = nil, categories: [GoHereCore.PlaceCategory] = [], defaultRegion: MapKit.MKMapRect? = nil, biasLocation: GoHereCore.GPSLocation? = nil, bannerId: Swift.String? = nil, uberClientId: Swift.String? = nil, promotedPlacesSearchRadius: Swift.Int = 10_000, maximumSpanDistance: Swift.Int = 20_000, androidAppId: Swift.String = "", iOSAppId: Swift.String = "", iOSStoreId: Swift.String = "")
+}
+public struct BucketList {
+  public let id: Swift.String
+  public var name: Swift.String
+  public var places: [GoHereCore.Place]
+  public let user: GoHereCore.User?
+}
+public struct GPSLocation : Swift.Codable, Swift.Hashable {
+  public let latitude: CoreLocation.CLLocationDegrees
+  public let longitude: CoreLocation.CLLocationDegrees
+  public var coordinate: CoreLocation.CLLocationCoordinate2D {
+    get
+  }
+  public func prettyDistanceFromUser() -> Swift.String?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.GPSLocation, b: GoHereCore.GPSLocation) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class DomainError : Swift.Error, Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class UnknownError : GoHereCore.DomainError {
+  public init()
+  override public var errorDescription: Swift.String? {
+    get
+  }
+  @objc deinit
+}
+public struct ImagePath : Swift.Codable, Swift.Hashable {
+  public init(path: Swift.String)
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public func originalSizeURL() -> Foundation.URL
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.ImagePath, b: GoHereCore.ImagePath) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum LoginKind : Swift.String {
+  case credentials
+  case phone
+  case facebook
+  case apple
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct PaginatedResult<T> {
+  public let result: T
+  public let hasMore: Swift.Bool
+}
+public struct Place : Swift.Hashable, Swift.Identifiable {
+  public typealias ID = Swift.String
+  public let id: GoHereCore.Place.ID
+  public let idGoogle: Swift.String?
+  public let name: Swift.String
+  public let address: Swift.String
+  public let city: Swift.String
+  public let country: Swift.String
+  public let location: GoHereCore.GPSLocation
+  public let category: GoHereCore.PlaceCategory
+  public let website: Foundation.URL?
+  public let phone: Swift.String
+  public let affiliate: GoHereCore.AffiliateInfo?
+  public let photo: GoHereCore.ImagePath?
+  public let info: GoHereCore.Place.Info?
+  public var averageRating: Swift.Int?
+  public let labels: [Swift.String]?
+  public var lastReview: GoHereCore.ReviewInline?
+  public struct Info : Swift.Hashable {
+    public let openingHours: GoHereCore.OpeningHours?
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: GoHereCore.Place.Info, b: GoHereCore.Place.Info) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static func == (lhs: GoHereCore.Place, rhs: GoHereCore.Place) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct OpeningHours : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.OpeningHours, b: GoHereCore.OpeningHours) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct PlaceCategory : Swift.Identifiable, Swift.Hashable {
+  public typealias ID = Swift.Int
+  public let id: GoHereCore.PlaceCategory.ID
+  public let slug: Swift.String
+  public let icon: GoHereCore.ImagePath
+  public init(id: GoHereCore.PlaceCategory.ID, slug: Swift.String, icon: GoHereCore.ImagePath)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.PlaceCategory, b: GoHereCore.PlaceCategory) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct PlaceExternal : Swift.Hashable {
+  public typealias ID = Swift.String
+  public let id: GoHereCore.PlaceExternal.ID
+  public let providerId: Swift.Int
+  public let title: Swift.String
+  public let vicinity: Swift.String
+  public let location: GoHereCore.GPSLocation?
+  public let category: GoHereCore.PlaceCategory?
+  public init(id: Swift.String, providerId: Swift.Int, title: Swift.String, vicinity: Swift.String, location: GoHereCore.GPSLocation?, category: GoHereCore.PlaceCategory?)
+  public var isPOI: Swift.Bool {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.PlaceExternal, b: GoHereCore.PlaceExternal) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct PromotedPlaces {
+  public let id: Swift.Int
+  public let title: Swift.String
+  public let places: Swift.Set<GoHereCore.Place>
+}
+public struct Review : Swift.Identifiable, Swift.Hashable {
+  public typealias ID = Swift.String
+  public let id: GoHereCore.Review.ID
+  public struct Image : Swift.Decodable, Swift.Hashable {
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: GoHereCore.Review.Image, b: GoHereCore.Review.Image) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: Swift.Decoder) throws
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.Review, b: GoHereCore.Review) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ReviewChange {
+  case deletion(id: GoHereCore.Review.ID)
+  case creation(review: GoHereCore.Review)
+  case update(review: GoHereCore.Review)
+}
+public struct ReviewInline : Swift.Identifiable, Swift.Hashable {
+  public typealias ID = Swift.String
+  public let id: GoHereCore.ReviewInline.ID
+  public let user: GoHereCore.User
+  public let rating: Swift.Int
+  public let text: Swift.String
+  public let createdAt: Foundation.Date
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.ReviewInline, b: GoHereCore.ReviewInline) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ReviewReportReason : Swift.String, Swift.CaseIterable, Swift.Identifiable {
+  case spam
+  case offensive
+  case other
+  public var id: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [GoHereCore.ReviewReportReason]
+  public typealias ID = Swift.String
+  public typealias RawValue = Swift.String
+  public static var allCases: [GoHereCore.ReviewReportReason] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum Status<T> : Swift.Equatable where T : Swift.Equatable {
+  case none
+  case loading(value: T? = nil)
+  case success(value: T)
+  case failure(error: GoHereCore.DomainError)
+  public static func == (lhs: GoHereCore.Status<T>, rhs: GoHereCore.Status<T>) -> Swift.Bool
+  public var isLoading: Swift.Bool {
+    get
+  }
+  public var isSuccess: Swift.Bool {
+    get
+  }
+  public var isError: Swift.Bool {
+    get
+  }
+  public var value: T? {
+    get
+  }
+}
+public struct Translation : Swift.Equatable {
+  public static func == (a: GoHereCore.Translation, b: GoHereCore.Translation) -> Swift.Bool
+}
+public struct UpdateUser {
+}
+public class User : Swift.Identifiable, Swift.Hashable {
+  final public let id: Swift.String
+  final public let email: Swift.String?
+  final public let phoneNumber: Swift.String?
+  final public let firstName: Swift.String
+  final public let lastName: Swift.String
+  public var followersCount: Swift.Int?
+  public var followingCount: Swift.Int?
+  final public let reviewCount: Swift.Int
+  final public let avatar: GoHereCore.ImagePath?
+  final public let hometown: Swift.String?
+  final public let isPrivate: Swift.Bool
+  final public let biography: Swift.String
+  public var fullName: Swift.String {
+    get
+  }
+  public var initials: Swift.String {
+    get
+    set
+  }
+  public init(id: Swift.String, email: Swift.String?, phoneNumber: Swift.String?, firstName: Swift.String, lastName: Swift.String, followersCount: Swift.Int?, followingCount: Swift.Int?, reviewCount: Swift.Int, avatar: GoHereCore.ImagePath?, hometown: Swift.String?, isPrivate: Swift.Bool, biography: Swift.String)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: GoHereCore.User, rhs: GoHereCore.User) -> Swift.Bool
+  public typealias ID = Swift.String
+  @objc deinit
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct UserConnection : Swift.Identifiable, Swift.Hashable {
+  public var id: Swift.String {
+    get
+  }
+  public enum Status : Swift.String, Swift.Decodable, Swift.CaseIterable {
+    case active
+    case pending
+    case ignored
+    case blocked
+    case none
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [GoHereCore.UserConnection.Status]
+    public typealias RawValue = Swift.String
+    public static var allCases: [GoHereCore.UserConnection.Status] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: GoHereCore.UserConnection, b: GoHereCore.UserConnection) -> Swift.Bool
+  public typealias ID = Swift.String
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class MultipartFormData {
+  open var contentType: Swift.String {
+    get
+    set
+  }
+  @objc deinit
+}
+public struct ReviewServiceListParameters {
+}
+public protocol BootstrapRepository {
+  func getBootstrap() -> Combine.AnyPublisher<GoHereCore.Bootstrap, Swift.Never>
+  var appName: Swift.String { get }
+  var appRealm: Swift.String { get }
+  var apiKey: Swift.String { get }
+  var appRealmForMixpanel: Swift.String { get }
+  var mixpanelToken: Swift.String? { get }
+}
+public protocol PlaceRepository {
+  func get(id: GoHereCore.Place.ID) -> Combine.AnyPublisher<GoHereCore.Place, GoHereCore.DomainError>
+  func search(area: (location: CoreLocation.CLLocationCoordinate2D, radius: Swift.Int)?, scoped: Swift.Bool, categories: [GoHereCore.PlaceCategory.ID], excludePlaceUUIDs: [Swift.String]) -> Combine.AnyPublisher<GoHereCore.PaginatedResult<[GoHereCore.Place]>, GoHereCore.DomainError>
+  func searchPromotedPlaces(location: CoreLocation.CLLocationCoordinate2D, radius: Swift.Int) -> Combine.AnyPublisher<GoHereCore.PromotedPlaces, GoHereCore.DomainError>
+  func getPlace(from externalId: Swift.String) -> Combine.AnyPublisher<GoHereCore.Place, GoHereCore.DomainError>
+  func autocomplete(query: Swift.String, location: CoreLocation.CLLocationCoordinate2D) -> Combine.AnyPublisher<[GoHereCore.PlaceExternal], GoHereCore.DomainError>
+  func geocode(query: Swift.String) -> Combine.AnyPublisher<[GoHereCore.PlaceExternal], GoHereCore.DomainError>
+}
+public protocol ReviewRepository {
+  func create(place: GoHereCore.Place.ID, imageIds: [Swift.String], rating: Swift.Int, text: Swift.String) -> Combine.AnyPublisher<GoHereCore.Review, GoHereCore.DomainError>
+  func update(id: GoHereCore.Review.ID, imageIds: [Swift.String], rating: Swift.Int, text: Swift.String) -> Combine.AnyPublisher<GoHereCore.Review, GoHereCore.DomainError>
+  func list(params: GoHereCore.ReviewServiceListParameters) -> Combine.AnyPublisher<GoHereCore.PaginatedResult<[GoHereCore.Review]>, GoHereCore.DomainError>
+  func delete(id: Swift.String) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func upload(images: [UIKit.UIImage]) -> Combine.AnyPublisher<[GoHereCore.Review.Image], GoHereCore.DomainError>
+  func observeReviewChanges() -> Combine.AnyPublisher<GoHereCore.ReviewChange, Swift.Never>
+  func reportReview(id: GoHereCore.Review.ID, reason: GoHereCore.ReviewReportReason) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+}
+public protocol TranslatorRepository {
+  func translateReview(reviewId: Swift.String, to: Swift.String) -> Combine.AnyPublisher<GoHereCore.Translation, Swift.Error>
+}
+public protocol UserRepository {
+  func updateAvatarAndVisibility(isPrivate: Swift.Bool, avatar: UIKit.UIImage?, for userId: GoHereCore.User.ID) -> Combine.AnyPublisher<GoHereCore.User, GoHereCore.DomainError>
+  func observeUser() -> Combine.AnyPublisher<GoHereCore.User?, Swift.Never>
+  func observeUserId() -> Combine.AnyPublisher<GoHereCore.User.ID?, Swift.Never>
+  func delete() -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func follow(user: GoHereCore.User) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func unfollow(user: GoHereCore.User) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func block(user: GoHereCore.User) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func acceptFollowRequest(for connection: GoHereCore.UserConnection) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func blockFollowRequest(for connection: GoHereCore.UserConnection) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func ignoreFollowRequest(for connection: GoHereCore.UserConnection) -> Combine.AnyPublisher<Swift.Void, GoHereCore.DomainError>
+  func observeFollowingStatus(for user: GoHereCore.User) -> Combine.AnyPublisher<GoHereCore.UserConnection.Status, Swift.Never>
+  func observeFollowingRequests() -> Combine.AnyPublisher<[GoHereCore.UserConnection], Swift.Never>
+  func getFollowers(for id: GoHereCore.User.ID, offset: Swift.UInt, limit: Swift.UInt) -> Combine.AnyPublisher<GoHereCore.PaginatedResult<[GoHereCore.UserConnection]>, GoHereCore.DomainError>
+  func getFollowings(for id: GoHereCore.User.ID, offset: Swift.UInt, limit: Swift.UInt) -> Combine.AnyPublisher<GoHereCore.PaginatedResult<[GoHereCore.UserConnection]>, GoHereCore.DomainError>
+  func getUserProfile(id: GoHereCore.User.ID) -> Combine.AnyPublisher<GoHereCore.User, GoHereCore.DomainError>
+  func isFacebookAuthenticated() -> Combine.AnyPublisher<Swift.Bool, Swift.Never>
+  func suggestFriends(emailHashes: [Swift.String]?, phoneNumberHashes: [Swift.String]?) -> Combine.AnyPublisher<[GoHereCore.User], GoHereCore.DomainError>
+  func search(query: Swift.String) -> Combine.AnyPublisher<[GoHereCore.User], GoHereCore.DomainError>
+  func update(user: GoHereCore.UpdateUser) -> Combine.AnyPublisher<GoHereCore.User, GoHereCore.DomainError>
+}
+public struct TargetConfig {
+  public let dynamicLinkDomain: Swift.String
+  public var baseShareURL: Foundation.URL {
+    get
+  }
+  public init(appName: Swift.String, appRealm: Swift.String, appRealmForMixpanel: Swift.String, apiKey: Swift.String, isRatingAllowed: Swift.Bool = true, isReviewDateVisible: Swift.Bool = false, floatingButtonContentColor: UIKit.UIColor? = nil, showMapFilter: Swift.Bool = true, externalPlaceProviderId: Swift.Int = 1, maxRatingValue: Swift.Int = 10, mapStyleLightUrl: Foundation.URL? = nil, mapStyleDarkUrl: Foundation.URL? = nil, isReviewingAllowed: Swift.Bool = true, dynamicLinkDomain: Swift.String = "https://gohereapp.page.link", onboardingIntroView: ((_ introCompleted: @escaping () -> Swift.Void) -> SwiftUI.AnyView)? = nil)
+}
+extension GoHereCore.Theme {
+  public static func configureAppearance()
+}
+extension UIKit.UIColor {
+  public static func gh(_ color: GoHereCore.Theme.Color) -> UIKit.UIColor
+}
+extension SwiftUI.Color {
+  public static func gh(_ color: GoHereCore.Theme.Color) -> SwiftUI.Color
+}
+public struct GHColorScheme {
+  public let tintPrimary: UIKit.UIColor
+  public let tintSecondary: UIKit.UIColor
+  public let tintTertiary: UIKit.UIColor
+  public let tintQuaternary: UIKit.UIColor
+  public let onTintPrimary: UIKit.UIColor
+  public let onTintSecondary: UIKit.UIColor
+  public let onTintTertiary: UIKit.UIColor
+  public let onTintQuaternary: UIKit.UIColor
+  public let backgroundPrimary: UIKit.UIColor
+  public let backgroundSecondary: UIKit.UIColor
+  public let backgroundTertiary: UIKit.UIColor
+  public let labelPrimary: UIKit.UIColor
+  public let labelSecondary: UIKit.UIColor
+  public let labelTertiary: UIKit.UIColor
+  public let labelQuaternary: UIKit.UIColor
+  public let navbar: UIKit.UIColor
+  public let tabbar: UIKit.UIColor
+  public let onNavbar: UIKit.UIColor
+  public let onTabbarDefault: UIKit.UIColor
+  public let onTabbarSelected: UIKit.UIColor
+  public let notification: UIKit.UIColor
+  public let placeholderText: UIKit.UIColor
+  public let separator: UIKit.UIColor
+  public let separatorOpaque: UIKit.UIColor
+  public let link: UIKit.UIColor
+  public let onNotification: UIKit.UIColor
+  public let utilityPositive: UIKit.UIColor
+  public let utilityError: UIKit.UIColor
+  public let utilityNeutral: UIKit.UIColor
+  public let onUtilityPositive: UIKit.UIColor
+  public let onUtilityError: UIKit.UIColor
+  public let onUtilityNeutral: UIKit.UIColor
+  public let affiliate: UIKit.UIColor
+  public let onAffiliate: UIKit.UIColor
+  public let pin: UIKit.UIColor
+  public let onPin: UIKit.UIColor
+  public let rating: UIKit.UIColor
+  public let appIcon: UIKit.UIColor
+  public let onAppIcon: UIKit.UIColor
+  public let filterIcon: UIKit.UIColor
+  public var bottomSheet: UIKit.UIColor {
+    get
+  }
+  public init(tintPrimary: UIKit.UIColor = GHColorScheme.color(light: 0x5AAE92, dark: 0x5AAE92), tintSecondary: UIKit.UIColor = GHColorScheme.color(light: 0x87ACD9, dark: 0x87ACD9), tintTertiary: UIKit.UIColor = GHColorScheme.color(light: 0x141430, dark: 0x141430), tintQuaternary: UIKit.UIColor = GHColorScheme.color(light: 0xF4F4F4, dark: 0x262626), onTintPrimary: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), onTintSecondary: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), onTintTertiary: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), onTintQuaternary: UIKit.UIColor = GHColorScheme.color(light: 0x343434, dark: 0xFFFFFF), backgroundPrimary: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0x000000), backgroundSecondary: UIKit.UIColor = GHColorScheme.color(light: 0xE8E8E8, dark: 0x111111), backgroundTertiary: UIKit.UIColor = GHColorScheme.color(light: 0xEDEDED, dark: 0x353A4B), labelPrimary: UIKit.UIColor = GHColorScheme.color(light: 0x141430, dark: 0xC8C8C8), labelSecondary: UIKit.UIColor = GHColorScheme.color(light: 0x65656B, dark: 0x8E8E93), labelTertiary: UIKit.UIColor = GHColorScheme.color(light: 0xAEAEB2, dark: 0x636366), labelQuaternary: UIKit.UIColor = GHColorScheme.color(light: 0xC7C7CC, dark: 0x48484A), navbar: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0x2E2E2E), tabbar: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0x2E2E2E), onNavbar: UIKit.UIColor = GHColorScheme.color(light: 0x343434, dark: 0xC8C8C8), onTabbarDefault: UIKit.UIColor = GHColorScheme.color(light: 0x343434, dark: 0xC8C8C8, al: 0.5, ad: 0.5), onTabbarSelected: UIKit.UIColor = GHColorScheme.color(light: 0x5AAE92, dark: 0x5AAE92), notification: UIKit.UIColor = GHColorScheme.color(light: 0xF06977, dark: 0xF06977), onNotification: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), utilityPositive: UIKit.UIColor = GHColorScheme.color(light: 0x5AAE92, dark: 0x5AAE92), utilityError: UIKit.UIColor = GHColorScheme.color(light: 0xF05161, dark: 0xF05161), onUtilityError: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), affiliate: UIKit.UIColor = GHColorScheme.color(light: 0x5AAE92, dark: 0x5AAE92), onAffiliate: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0xFFFFFF), pin: UIKit.UIColor = GHColorScheme.color(light: 0xFFFFFF, dark: 0x000000), onPin: UIKit.UIColor = GHColorScheme.color(light: 0x000000, dark: 0xFFFFFF), rating: UIKit.UIColor = GHColorScheme.color(light: 0xFCC71E, dark: 0xE8C500), appIcon: UIKit.UIColor = GHColorScheme.color(light: 0x141430, dark: 0x141430), onAppIcon: UIKit.UIColor = GHColorScheme.color(light: 0xA3D2C2, dark: 0xA3D2C2), filterIcon: UIKit.UIColor? = nil)
+  public static func color(light: Swift.Int, dark: Swift.Int, al: CoreFoundation.CGFloat = 1.0, ad: CoreFoundation.CGFloat = 1.0) -> UIKit.UIColor
+}
+public struct Theme {
+  public let colorScheme: GoHereCore.GHColorScheme
+  public let typos: GoHereCore.GHTypography
+  public init(colors: GoHereCore.GHColorScheme, typos: GoHereCore.GHTypography = GHTypography())
+  public enum Color {
+    case tintPrimary
+    case tintSecondary
+    case tintTertiary
+    case tintQuaternary
+    case onTintPrimary
+    case onTintSecondary
+    case onTintTertiary
+    case onTintQuaternary
+    case backgroundPrimary
+    case backgroundSecondary
+    case backgroundTertiary
+    case labelPrimary
+    case labelSecondary
+    case labelTertiary
+    case labelQuaternary
+    case navbar
+    case tabbar
+    case onNavbar
+    case onTabbarDefault
+    case onTabbarSelected
+    case notification
+    case placeholderText
+    case separator
+    case separatorOpaque
+    case link
+    case onNotification
+    case utilityPositive
+    case utilityError
+    case utilityNeutral
+    case onUtilityPositive
+    case onUtilityError
+    case onUtilityNeutral
+    case affiliate
+    case onAffiliate
+    case pin
+    case onPin
+    case rating
+    case appIcon
+    case onAppIcon
+    case bottomSheet
+    case filterIcon
+    public static func == (a: GoHereCore.Theme.Color, b: GoHereCore.Theme.Color) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@_Concurrency.MainActor(unsafe) public struct ThemePreviewProvider : SwiftUI.PreviewProvider {
+  @_Concurrency.MainActor(unsafe) public static var previews: some SwiftUI.View {
+    get
+  }
+  public typealias Previews = @_opaqueReturnTypeOf("$s10GoHereCore20ThemePreviewProviderV8previewsQrvpZ", 0) __
+}
+extension SwiftUI.Font {
+  public static func gh(_ font: GoHereCore.Theme.Font) -> SwiftUI.Font
+}
+extension UIKit.UIFont {
+  public static func gh(_ font: GoHereCore.Theme.Font) -> UIKit.UIFont?
+}
+public struct GHTypography {
+  public typealias FontInfo = (name: Swift.String, size: CoreFoundation.CGFloat)
+  public let largeTitle: GoHereCore.GHTypography.FontInfo
+  public let title1: GoHereCore.GHTypography.FontInfo
+  public let title2: GoHereCore.GHTypography.FontInfo
+  public let title3: GoHereCore.GHTypography.FontInfo
+  public let headline: GoHereCore.GHTypography.FontInfo
+  public let body: GoHereCore.GHTypography.FontInfo
+  public let callout: GoHereCore.GHTypography.FontInfo
+  public let subhead: GoHereCore.GHTypography.FontInfo
+  public let footnote: GoHereCore.GHTypography.FontInfo
+  public let caption1: GoHereCore.GHTypography.FontInfo
+  public let caption2: GoHereCore.GHTypography.FontInfo
+  public let pin: GoHereCore.GHTypography.FontInfo
+  public let notification: GoHereCore.GHTypography.FontInfo
+  public let tab: GoHereCore.GHTypography.FontInfo
+  public init(largeTitle: GoHereCore.GHTypography.FontInfo = ("Avenir-Black", 34), title1: GoHereCore.GHTypography.FontInfo = ("Avenir-Heavy", 28), title2: GoHereCore.GHTypography.FontInfo = ("Avenir-Heavy", 22), title3: GoHereCore.GHTypography.FontInfo = ("Avenir-Heavy", 18), headline: GoHereCore.GHTypography.FontInfo = ("Avenir-Medium", 17), body: GoHereCore.GHTypography.FontInfo = ("Avenir-Book", 17), callout: GoHereCore.GHTypography.FontInfo = ("Avenir-Book", 16), subhead: GoHereCore.GHTypography.FontInfo = ("Avenir-Heavy", 14), footnote: GoHereCore.GHTypography.FontInfo = ("Avenir-Roman", 13), caption1: GoHereCore.GHTypography.FontInfo = ("Avenir-Medium", 12), caption2: GoHereCore.GHTypography.FontInfo = ("Avenir-Medium", 12), pin: GoHereCore.GHTypography.FontInfo = ("Avenir-Heavy", 11), notification: GoHereCore.GHTypography.FontInfo = ("Roboto-Bold", 9), tab: GoHereCore.GHTypography.FontInfo = ("Roboto-Medium", 12.2))
+}
+extension GoHereCore.Theme {
+  public enum Font {
+    case largeTitle
+    case title1
+    case title2
+    case title3
+    case headline
+    case body
+    case callout
+    case subhead
+    case footnote
+    case caption1
+    case caption2
+    case pin
+    case notification
+    case tab
+    public static func == (a: GoHereCore.Theme.Font, b: GoHereCore.Theme.Font) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension GoHereCore.AnalyticsUserProperty : Swift.Equatable {}
+extension GoHereCore.AnalyticsUserProperty : Swift.Hashable {}
+extension GoHereCore.AnalyticsUserProperty : Swift.RawRepresentable {}
+extension GoHereCore.FloatingActionButtonStyle.Width : Swift.Equatable {}
+extension GoHereCore.FloatingActionButtonStyle.Width : Swift.Hashable {}
+extension GoHereCore.MapListSwitchStyle : Swift.Equatable {}
+extension GoHereCore.MapListSwitchStyle : Swift.Hashable {}
+extension GoHereCore.PromotedBottomSheetPosition : Swift.Equatable {}
+extension GoHereCore.PromotedBottomSheetPosition : Swift.Hashable {}
+extension GoHereCore.PromotedBottomSheetPosition : Swift.RawRepresentable {}
+extension GoHereCore.LocationServicesStatus : Swift.Equatable {}
+extension GoHereCore.LocationServicesStatus : Swift.Hashable {}
+extension GoHereCore.LoginKind : Swift.Equatable {}
+extension GoHereCore.LoginKind : Swift.Hashable {}
+extension GoHereCore.LoginKind : Swift.RawRepresentable {}
+extension GoHereCore.UserConnection.Status : Swift.Equatable {}
+extension GoHereCore.UserConnection.Status : Swift.Hashable {}
+extension GoHereCore.UserConnection.Status : Swift.RawRepresentable {}
+extension GoHereCore.ReviewReportReason : Swift.Equatable {}
+extension GoHereCore.ReviewReportReason : Swift.Hashable {}
+extension GoHereCore.ReviewReportReason : Swift.RawRepresentable {}
+extension GoHereCore.Theme.Color : Swift.Equatable {}
+extension GoHereCore.Theme.Color : Swift.Hashable {}
+extension GoHereCore.Theme.Font : Swift.Equatable {}
+extension GoHereCore.Theme.Font : Swift.Hashable {}

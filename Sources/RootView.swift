@@ -5,13 +5,12 @@
 //  Created by jorisfavier on 19/04/2023.
 //
 import SwiftUI
-import GoHereCore
 import GoHereSDK
 
 struct RootView: View {
     
     init() {
-        GoHereSDK.initialize(
+        GohereSDK.initialize(
             appName: "GoHere",
             appRealm: "gohere",
             apiKey: "***REMOVED***"

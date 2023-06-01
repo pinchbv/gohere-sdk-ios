@@ -1,0 +1,5 @@
+"NSCameraUsageDescription" = "Camera is used to edit your profile photo or take photos for your reviews.";
+"NSPhotoLibraryUsageDescription" = "Photo library is used to edit your profile photo or upload photos for your reviews.";
+"NSLocationAlwaysUsageDescription" = "Your location is used to discover and show interesting places around you";
+"NSLocationWhenInUseUsageDescription" = "Your location is used to discover and show interesting places around you";
+"NSContactsUsageDescription" = "Your contacts are used to connect you to your friends. Your contacts are sent to our server, but not stored.";

@@ -1,0 +1,5 @@
+"NSCameraUsageDescription" = "De camera wordt gebruikt om je profielfoto aan te passen of foto’s te maken bij je reviews.";
+"NSPhotoLibraryUsageDescription" = "De fotorol wordt gebruikt om je profielfoto aan te passen of foto’s te uploaden bij je reviews.";
+"NSLocationAlwaysUsageDescription" = "Je locatie wordt gebruikt om interessante plekken bij je in de buurt te kunnen tonen";
+"NSLocationWhenInUseUsageDescription" = "Je locatie wordt gebruikt om interessante plekken bij je in de buurt te kunnen tonen";
+"NSContactsUsageDescription" = "Er wordt gebruik gemaakt van Contacten om je te koppelen aan vrienden. Je contacten worden naar onze server verstuurd, maar niet opgeslagen.";
