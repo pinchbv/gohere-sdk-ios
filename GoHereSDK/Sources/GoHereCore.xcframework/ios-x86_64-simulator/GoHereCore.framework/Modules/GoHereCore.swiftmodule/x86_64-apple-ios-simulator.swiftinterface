@@ -72,8 +72,29 @@ public struct SavePlaceButton : SwiftUI.View {
   public typealias Body = @_opaqueReturnTypeOf("$s10GoHereCore15SavePlaceButtonV4bodyQrvp", 0) __
 }
 extension SwiftUI.View {
+  public func primaryButtonStyle(size: GoHereCore.ButtonSize = .large, width: GoHereCore.ButtonWidth? = nil) -> some SwiftUI.View
+  
   public func floatingActionButtonStyle(width: GoHereCore.FloatingActionButtonStyle.Width = .compact, backgroundColor: SwiftUI.Color = .gh(.backgroundPrimary)) -> some SwiftUI.View
   
+}
+public enum ButtonSize {
+  case large
+  case medium
+  case small
+  public static func == (a: GoHereCore.ButtonSize, b: GoHereCore.ButtonSize) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ButtonWidth {
+  case fitContent
+  case infinity
+  public static func == (a: GoHereCore.ButtonWidth, b: GoHereCore.ButtonWidth) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 public struct HighlightButtonStyle : SwiftUI.ButtonStyle {
   public enum Kind {
@@ -166,6 +187,18 @@ extension UIKit.UIImagePickerController.SourceType : Swift.Identifiable {
     get
   }
   public typealias ID = Swift.Int
+}
+public struct LottieIntroView : SwiftUI.UIViewRepresentable {
+  public struct AnimationSegment : Swift.Equatable {
+    public init(fromMarker: Swift.String, toMarker: Swift.String, text: Swift.String)
+    public static func == (a: GoHereCore.LottieIntroView.AnimationSegment, b: GoHereCore.LottieIntroView.AnimationSegment) -> Swift.Bool
+  }
+  public init(name: Swift.String, animationSegments: [GoHereCore.LottieIntroView.AnimationSegment], segmentText: SwiftUI.Binding<Swift.String>)
+  @_Concurrency.MainActor(unsafe) public func makeUIView(context _: SwiftUI.UIViewRepresentableContext<GoHereCore.LottieIntroView>) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func updateUIView(_ uiView: UIKit.UIView, context _: SwiftUI.UIViewRepresentableContext<GoHereCore.LottieIntroView>)
+  public typealias Body = Swift.Never
+  public typealias Coordinator = Swift.Void
+  public typealias UIViewType = UIKit.UIView
 }
 public struct SafariView : SwiftUI.UIViewControllerRepresentable {
   public init(url: Foundation.URL)
@@ -491,6 +524,9 @@ extension Swift.String {
 }
 extension MapKit.MKCoordinateRegion : Swift.Equatable {
   public static func == (lhs: MapKit.MKCoordinateRegion, rhs: MapKit.MKCoordinateRegion) -> Swift.Bool
+}
+extension Swift.String {
+  public func localizedFromTarget() -> Swift.String
 }
 extension UIKit.UIApplication {
   @_Concurrency.MainActor(unsafe) public var fullApplicationVersion: Swift.String {
@@ -1080,6 +1116,10 @@ extension GoHereCore.Theme {
 extension GoHereCore.AnalyticsUserProperty : Swift.Equatable {}
 extension GoHereCore.AnalyticsUserProperty : Swift.Hashable {}
 extension GoHereCore.AnalyticsUserProperty : Swift.RawRepresentable {}
+extension GoHereCore.ButtonSize : Swift.Equatable {}
+extension GoHereCore.ButtonSize : Swift.Hashable {}
+extension GoHereCore.ButtonWidth : Swift.Equatable {}
+extension GoHereCore.ButtonWidth : Swift.Hashable {}
 extension GoHereCore.FloatingActionButtonStyle.Width : Swift.Equatable {}
 extension GoHereCore.FloatingActionButtonStyle.Width : Swift.Hashable {}
 extension GoHereCore.MapListSwitchStyle : Swift.Equatable {}
