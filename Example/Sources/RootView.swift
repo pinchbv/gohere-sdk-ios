@@ -13,7 +13,7 @@ struct RootView: View {
         GohereSDK.initialize(
             appName: "GoHere",
             appRealm: "gohere",
-            apiKey: "***REMOVED***"
+            apiKey: "123456789"
         )
     }
     
