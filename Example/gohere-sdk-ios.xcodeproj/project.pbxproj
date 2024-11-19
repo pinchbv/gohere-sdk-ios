@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C71769EE2A385982004D2F36 /* GoHereSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C71769ED2A385982004D2F36 /* GoHereSDK */; };
+		C72DD6A02CE77748000F9C9E /* GoHereSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C72DD69F2CE77748000F9C9E /* GoHereSDK */; };
+		C79C310D2CECA37300FB2818 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C7293B162CEB814500C18F14 /* GoogleMaps.bundle */; };
 		C7E1C6E72A02B33E001A13D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E62A02B33E001A13D2 /* Assets.xcassets */; };
 		C7E1C6EA2A02B33E001A13D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E92A02B33E001A13D2 /* Preview Assets.xcassets */; };
 		C7E1C6F42A02B3E5001A13D2 /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F02A02B3E4001A13D2 /* SampleApp.swift */; };
 		C7E1C6F52A02B3E5001A13D2 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F12A02B3E4001A13D2 /* RootView.swift */; };
 		C7E1C6F62A02B3E5001A13D2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F22A02B3E4001A13D2 /* HomeView.swift */; };
 		C7E1C6F72A02B3E5001A13D2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F32A02B3E5001A13D2 /* ProfileView.swift */; };
-		C7E1C6FE2A02B7A2001A13D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6FD2A02B7A1001A13D2 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		C71769EC2A385881004D2F36 /* gohere-sdk-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "gohere-sdk-ios"; path = ..; sourceTree = "<group>"; };
+		C7293B162CEB814500C18F14 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		C7E1C6DF2A02B33C001A13D2 /* gohere-sdk-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gohere-sdk-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E1C6E62A02B33E001A13D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7E1C6E92A02B33E001A13D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		C7E1C6F12A02B3E4001A13D2 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		C7E1C6F22A02B3E4001A13D2 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C7E1C6F32A02B3E5001A13D2 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		C7E1C6FD2A02B7A1001A13D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C71769EE2A385982004D2F36 /* GoHereSDK in Frameworks */,
+				C72DD6A02CE77748000F9C9E /* GoHereSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +57,7 @@
 		C7E1C6D62A02B33C001A13D2 = {
 			isa = PBXGroup;
 			children = (
+				C7293B162CEB814500C18F14 /* GoogleMaps.bundle */,
 				C7E1C6F82A02B466001A13D2 /* Packages */,
 				C7E1C6E12A02B33C001A13D2 /* Sources */,
 				C7E1C6E02A02B33C001A13D2 /* Products */,
@@ -75,7 +76,6 @@
 		C7E1C6E12A02B33C001A13D2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C7E1C6FD2A02B7A1001A13D2 /* GoogleService-Info.plist */,
 				C7E1C6F22A02B3E4001A13D2 /* HomeView.swift */,
 				C7E1C6F32A02B3E5001A13D2 /* ProfileView.swift */,
 				C7E1C6F12A02B3E4001A13D2 /* RootView.swift */,
@@ -127,7 +127,7 @@
 			);
 			name = "gohere-sdk-ios";
 			packageProductDependencies = (
-				C71769ED2A385982004D2F36 /* GoHereSDK */,
+				C72DD69F2CE77748000F9C9E /* GoHereSDK */,
 			);
 			productName = "gohere-sdk-ios";
 			productReference = C7E1C6DF2A02B33C001A13D2 /* gohere-sdk-ios.app */;
@@ -171,9 +171,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C79C310D2CECA37300FB2818 /* GoogleMaps.bundle in Resources */,
 				C7E1C6EA2A02B33E001A13D2 /* Preview Assets.xcassets in Resources */,
 				C7E1C6E72A02B33E001A13D2 /* Assets.xcassets in Resources */,
-				C7E1C6FE2A02B7A2001A13D2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +327,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -360,7 +360,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -398,7 +398,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C71769ED2A385982004D2F36 /* GoHereSDK */ = {
+		C72DD69F2CE77748000F9C9E /* GoHereSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GoHereSDK;
 		};

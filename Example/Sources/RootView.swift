@@ -1,9 +1,3 @@
-//
-//  ContentView.swift
-//  sample
-//
-//  Created by jorisfavier on 19/04/2023.
-//
 import SwiftUI
 import GoHereSDK
 
@@ -27,7 +21,7 @@ struct RootView: View {
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.square")
                 }
-            ExploreView()
+            GoHereView()
                 .tabItem {
                     Label("Sdk", systemImage: "person.crop.square")
                 }
