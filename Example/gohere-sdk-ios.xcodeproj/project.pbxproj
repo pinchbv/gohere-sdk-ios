@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C72DD6A02CE77748000F9C9E /* GoHereSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C72DD69F2CE77748000F9C9E /* GoHereSDK */; };
-		C79C310D2CECA37300FB2818 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C7293B162CEB814500C18F14 /* GoogleMaps.bundle */; };
 		C7E1C6E72A02B33E001A13D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E62A02B33E001A13D2 /* Assets.xcassets */; };
 		C7E1C6EA2A02B33E001A13D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E92A02B33E001A13D2 /* Preview Assets.xcassets */; };
 		C7E1C6F42A02B3E5001A13D2 /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F02A02B3E4001A13D2 /* SampleApp.swift */; };
@@ -32,7 +31,6 @@
 
 /* Begin PBXFileReference section */
 		C71769EC2A385881004D2F36 /* gohere-sdk-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "gohere-sdk-ios"; path = ..; sourceTree = "<group>"; };
-		C7293B162CEB814500C18F14 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		C7E1C6DF2A02B33C001A13D2 /* gohere-sdk-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gohere-sdk-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E1C6E62A02B33E001A13D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7E1C6E92A02B33E001A13D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 		C7E1C6D62A02B33C001A13D2 = {
 			isa = PBXGroup;
 			children = (
-				C7293B162CEB814500C18F14 /* GoogleMaps.bundle */,
 				C7E1C6F82A02B466001A13D2 /* Packages */,
 				C7E1C6E12A02B33C001A13D2 /* Sources */,
 				C7E1C6E02A02B33C001A13D2 /* Products */,
@@ -171,7 +168,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C79C310D2CECA37300FB2818 /* GoogleMaps.bundle in Resources */,
 				C7E1C6EA2A02B33E001A13D2 /* Preview Assets.xcassets in Resources */,
 				C7E1C6E72A02B33E001A13D2 /* Assets.xcassets in Resources */,
 			);

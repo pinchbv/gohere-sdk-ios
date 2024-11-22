@@ -23,7 +23,10 @@ let package = Package(
             dependencies: [
                 .target(name: "GoHereSDK"),
             ],
-            resources: [.copy("Resources/GoogleMaps.bundle")]
+            resources: [
+                .copy("Resources/GoogleMaps.bundle/GoogleMaps.bundle"),
+                .copy("Resources/GoogleMaps.bundle/_CodeSignature"),
+            ]
         )
     ]
 )
