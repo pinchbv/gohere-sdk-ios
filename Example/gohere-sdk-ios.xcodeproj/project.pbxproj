@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C72DD6A02CE77748000F9C9E /* GoHereSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C72DD69F2CE77748000F9C9E /* GoHereSDK */; };
+		C7585F2E2FF6914B00A65108 /* GoHereSDK in Frameworks */ = {isa = PBXBuildFile; productRef = C7585F2D2FF6914B00A65108 /* GoHereSDK */; };
 		C7E1C6E72A02B33E001A13D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E62A02B33E001A13D2 /* Assets.xcassets */; };
 		C7E1C6EA2A02B33E001A13D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7E1C6E92A02B33E001A13D2 /* Preview Assets.xcassets */; };
 		C7E1C6F42A02B3E5001A13D2 /* SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E1C6F02A02B3E4001A13D2 /* SampleApp.swift */; };
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C72DD6A02CE77748000F9C9E /* GoHereSDK in Frameworks */,
+				C7585F2E2FF6914B00A65108 /* GoHereSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 			);
 			name = "gohere-sdk-ios";
 			packageProductDependencies = (
-				C72DD69F2CE77748000F9C9E /* GoHereSDK */,
+				C7585F2D2FF6914B00A65108 /* GoHereSDK */,
 			);
 			productName = "gohere-sdk-ios";
 			productReference = C7E1C6DF2A02B33C001A13D2 /* gohere-sdk-ios.app */;
@@ -394,7 +394,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C72DD69F2CE77748000F9C9E /* GoHereSDK */ = {
+		C7585F2D2FF6914B00A65108 /* GoHereSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GoHereSDK;
 		};
